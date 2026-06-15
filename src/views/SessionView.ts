@@ -229,7 +229,7 @@ export class SessionView extends ItemView {
   async onOpen(): Promise<void> {
     const host = this.contentEl;
     host.empty();
-    host.addClass("obiclaude-session");
+    host.addClass("obsidiax-session");
 
     const term = new Terminal({
       allowProposedApi: true,
@@ -348,7 +348,7 @@ export class SessionView extends ItemView {
         case "close-tab": {
           // Refuse to kill the last window — that would tear down the session.
           if ((await this.tmux.windowCount(s)) <= 1) {
-            new Notice("Obiclaude: can't close the last tab.");
+            new Notice("OBSIDIAX: can't close the last tab.");
             return;
           }
           return await this.tmux.killWindow(s);

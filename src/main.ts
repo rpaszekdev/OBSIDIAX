@@ -1,4 +1,4 @@
-// Obiclaude — tmux inside Obsidian + a Claude Code session history rail.
+// OBSIDIAX — tmux inside Obsidian + a Claude Code session history rail.
 //
 // Wires the pieces together and owns the one cross-cutting flow (resume).
 // Everything risky (the PTY) sits behind PTYBridgeFactory so it can be swapped
@@ -21,7 +21,7 @@ import { SessionView } from "./views/SessionView";
 import { HistoryRailView } from "./views/HistoryRailView";
 import type { SessionMeta } from "./sessions/sessionStore";
 
-export default class ObiclaudePlugin extends Plugin {
+export default class ObsidiaxPlugin extends Plugin {
   private ptyFactory!: PTYBridgeFactory;
   private tmux!: TmuxController;
 
@@ -36,7 +36,7 @@ export default class ObiclaudePlugin extends Plugin {
       path.join(pluginDir, "node_modules", "node-pty"),
     );
     this.tmux = createTmuxController({
-      configPath: path.join(pluginDir, "obiclaude.tmux.conf"),
+      configPath: path.join(pluginDir, "obsidiax.tmux.conf"),
     });
 
     this.registerView(
@@ -55,12 +55,12 @@ export default class ObiclaudePlugin extends Plugin {
     );
 
     this.addCommand({
-      id: "obiclaude-open-session",
+      id: "obsidiax-open-session",
       name: "Open coding session",
       callback: () => void this.openSessionView(),
     });
     this.addCommand({
-      id: "obiclaude-open-history",
+      id: "obsidiax-open-history",
       name: "Open session history rail",
       callback: () => void this.openHistoryRail(),
     });
@@ -99,25 +99,25 @@ export default class ObiclaudePlugin extends Plugin {
 
     // Tabs (tmux windows) — ⌃⌥
     cmd(
-      "obiclaude-new-tab",
+      "obsidiax-new-tab",
       "New tab",
       [{ modifiers: ["Ctrl", "Alt"], key: "t" }],
       (s) => this.tmux.newWindow(s, "#{pane_current_path}", null, null),
     );
     cmd(
-      "obiclaude-close-tab",
+      "obsidiax-close-tab",
       "Close tab",
       [{ modifiers: ["Ctrl", "Alt"], key: "w" }],
       (s) => this.closeTab(s),
     );
     cmd(
-      "obiclaude-next-tab",
+      "obsidiax-next-tab",
       "Next tab",
       [{ modifiers: ["Ctrl", "Alt"], key: "]" }],
       (s) => this.tmux.nextWindow(s),
     );
     cmd(
-      "obiclaude-prev-tab",
+      "obsidiax-prev-tab",
       "Previous tab",
       [{ modifiers: ["Ctrl", "Alt"], key: "[" }],
       (s) => this.tmux.previousWindow(s),
@@ -125,25 +125,25 @@ export default class ObiclaudePlugin extends Plugin {
 
     // Splits / panes — ⌘
     cmd(
-      "obiclaude-split-vertical",
+      "obsidiax-split-vertical",
       "Split (side by side)",
       [{ modifiers: ["Mod"], key: "Enter" }],
       (s) => this.tmux.splitActive(s, "horizontal"),
     );
     cmd(
-      "obiclaude-split-horizontal",
+      "obsidiax-split-horizontal",
       "Split (stacked)",
       [{ modifiers: ["Mod"], key: "d" }],
       (s) => this.tmux.splitActive(s, "vertical"),
     );
     cmd(
-      "obiclaude-kill-pane",
+      "obsidiax-kill-pane",
       "Delete active pane",
       [{ modifiers: ["Mod"], key: "Backspace" }],
       (s) => this.tmux.killActivePane(s),
     );
     cmd(
-      "obiclaude-toggle-zoom",
+      "obsidiax-toggle-zoom",
       "Zoom active pane",
       [{ modifiers: ["Ctrl", "Shift"], key: "z" }],
       (s) => this.tmux.toggleZoom(s),
@@ -151,25 +151,25 @@ export default class ObiclaudePlugin extends Plugin {
 
     // Pane navigation — ⌘⌥ + Arrows
     cmd(
-      "obiclaude-pane-left",
+      "obsidiax-pane-left",
       "Focus pane left",
       [{ modifiers: ["Mod", "Alt"], key: "ArrowLeft" }],
       (s) => this.tmux.selectPane(s, "left"),
     );
     cmd(
-      "obiclaude-pane-right",
+      "obsidiax-pane-right",
       "Focus pane right",
       [{ modifiers: ["Mod", "Alt"], key: "ArrowRight" }],
       (s) => this.tmux.selectPane(s, "right"),
     );
     cmd(
-      "obiclaude-pane-up",
+      "obsidiax-pane-up",
       "Focus pane up",
       [{ modifiers: ["Mod", "Alt"], key: "ArrowUp" }],
       (s) => this.tmux.selectPane(s, "up"),
     );
     cmd(
-      "obiclaude-pane-down",
+      "obsidiax-pane-down",
       "Focus pane down",
       [{ modifiers: ["Mod", "Alt"], key: "ArrowDown" }],
       (s) => this.tmux.selectPane(s, "down"),

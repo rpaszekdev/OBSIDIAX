@@ -27,7 +27,7 @@ npm run build          # produces main.js
 ```
 
 Then symlink/copy `main.js`, `manifest.json`, `styles.css` into
-`<vault>/.obsidian/plugins/obiclaude/` and enable the plugin.
+`<vault>/.obsidian/plugins/obsidiax/` and enable the plugin.
 
 ### node-pty native module
 

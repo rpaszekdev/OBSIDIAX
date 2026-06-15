@@ -46,10 +46,10 @@ export class HistoryRailView extends ItemView {
   async onOpen(): Promise<void> {
     const root = this.contentEl;
     root.empty();
-    root.addClass("obiclaude-rail");
+    root.addClass("obsidiax-rail");
 
     this.renderControls(root);
-    this.listEl = root.createDiv({ cls: "obiclaude-rail-list" });
+    this.listEl = root.createDiv({ cls: "obsidiax-rail-list" });
 
     await this.reload();
   }
@@ -61,10 +61,10 @@ export class HistoryRailView extends ItemView {
   }
 
   private renderControls(root: HTMLElement): void {
-    const bar = root.createDiv({ cls: "obiclaude-rail-controls" });
+    const bar = root.createDiv({ cls: "obsidiax-rail-controls" });
 
     const search = bar.createEl("input", {
-      cls: "obiclaude-rail-search",
+      cls: "obsidiax-rail-search",
       attr: { type: "text", placeholder: "Search sessions…" },
     });
     search.addEventListener("input", () => {
@@ -72,12 +72,12 @@ export class HistoryRailView extends ItemView {
       this.renderList();
     });
 
-    const refresh = bar.createEl("button", { cls: "obiclaude-rail-refresh" });
+    const refresh = bar.createEl("button", { cls: "obsidiax-rail-refresh" });
     setIcon(refresh, "refresh-cw");
     refresh.setAttr("aria-label", "Refresh sessions");
     refresh.addEventListener("click", () => void this.reload());
 
-    const pills = root.createDiv({ cls: "obiclaude-rail-pills" });
+    const pills = root.createDiv({ cls: "obsidiax-rail-pills" });
     this.renderPill(pills, "recent", "Recent");
     this.renderPill(pills, "folder", "By folder");
   }
@@ -85,12 +85,12 @@ export class HistoryRailView extends ItemView {
   private renderPill(parent: HTMLElement, value: Filter, label: string): void {
     const pill = parent.createEl("button", {
       text: label,
-      cls: "obiclaude-pill" + (this.filter === value ? " is-active" : ""),
+      cls: "obsidiax-pill" + (this.filter === value ? " is-active" : ""),
     });
     pill.addEventListener("click", () => {
       this.filter = value;
       parent
-        .findAll(".obiclaude-pill")
+        .findAll(".obsidiax-pill")
         .forEach((el) => el.toggleClass("is-active", el === pill));
       this.renderList();
     });
@@ -110,7 +110,7 @@ export class HistoryRailView extends ItemView {
       : this.sessions;
 
     if (matches.length === 0) {
-      list.createDiv({ cls: "obiclaude-rail-empty", text: "No sessions yet." });
+      list.createDiv({ cls: "obsidiax-rail-empty", text: "No sessions yet." });
       return;
     }
 
@@ -138,7 +138,7 @@ export class HistoryRailView extends ItemView {
       const bucket = dateBucket(session.modifiedMs);
       if (bucket !== currentBucket) {
         currentBucket = bucket;
-        parent.createDiv({ cls: "obiclaude-rail-group", text: bucket });
+        parent.createDiv({ cls: "obsidiax-rail-group", text: bucket });
       }
       this.renderRow(parent, session, { showProject: true, indent: 0 });
     }
@@ -153,20 +153,20 @@ export class HistoryRailView extends ItemView {
     // While searching, force everything open so matches are always visible.
     const open = this.query !== "" || this.expanded.has(node.path);
 
-    const header = parent.createDiv({ cls: "obiclaude-tree-folder" });
+    const header = parent.createDiv({ cls: "obsidiax-tree-folder" });
     header.style.paddingLeft = `${6 + depth * 12}px`;
     header.setAttr("aria-label", node.path);
 
-    const chevron = header.createSpan({ cls: "obiclaude-tree-chevron" });
+    const chevron = header.createSpan({ cls: "obsidiax-tree-chevron" });
     setIcon(chevron, open ? "chevron-down" : "chevron-right");
 
-    const folderIcon = header.createSpan({ cls: "obiclaude-tree-icon" });
+    const folderIcon = header.createSpan({ cls: "obsidiax-tree-icon" });
     setIcon(folderIcon, open ? "folder-open" : "folder");
 
-    header.createSpan({ cls: "obiclaude-tree-name", text: node.name });
+    header.createSpan({ cls: "obsidiax-tree-name", text: node.name });
     const count = node.sessions.length;
     if (count > 0) {
-      header.createSpan({ cls: "obiclaude-tree-count", text: String(count) });
+      header.createSpan({ cls: "obsidiax-tree-count", text: String(count) });
     }
 
     header.addEventListener("click", () => {
@@ -190,18 +190,18 @@ export class HistoryRailView extends ItemView {
     session: SessionMeta,
     opts: { showProject: boolean; indent: number },
   ): void {
-    const row = parent.createDiv({ cls: "obiclaude-row" });
+    const row = parent.createDiv({ cls: "obsidiax-row" });
     if (opts.indent > 0) row.style.paddingLeft = `${6 + opts.indent * 12}px`;
     row.setAttr("aria-label", `Resume ${session.title}`);
 
-    row.createDiv({ cls: "obiclaude-row-title", text: session.title });
+    row.createDiv({ cls: "obsidiax-row-title", text: session.title });
 
-    const meta = row.createDiv({ cls: "obiclaude-row-meta" });
+    const meta = row.createDiv({ cls: "obsidiax-row-meta" });
     if (opts.showProject) {
-      meta.createSpan({ cls: "obiclaude-row-tag", text: session.project });
+      meta.createSpan({ cls: "obsidiax-row-tag", text: session.project });
     }
     meta.createSpan({
-      cls: "obiclaude-row-time",
+      cls: "obsidiax-row-time",
       text: relativeTime(session.modifiedMs),
     });
 

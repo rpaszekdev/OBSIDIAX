@@ -47,7 +47,7 @@ function loadNodePty(modulePath: string): NodePtyModule {
   } catch (err) {
     const detail = err instanceof Error ? err.message : String(err);
     throw new Error(
-      `Obiclaude: failed to load node-pty from ${modulePath} (native module / Electron ABI mismatch). ` +
+      `OBSIDIAX: failed to load node-pty from ${modulePath} (native module / Electron ABI mismatch). ` +
         `Rebuild it for this Obsidian version, or switch to the Rust PTY host. Cause: ${detail}`,
     );
   }

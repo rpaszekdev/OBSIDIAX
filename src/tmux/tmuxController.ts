@@ -5,7 +5,7 @@
 // a new window/pane we DON'T inject escape sequences into the terminal — we run
 // a normal `tmux` command and the attached client reflects it instantly.
 //
-// MODEL: one tmux session ("obiclaude"); each tmux WINDOW is a tab (rendered by
+// MODEL: one tmux session ("obsidiax"); each tmux WINDOW is a tab (rendered by
 // tmux's own status bar). Every command targets the session, which tmux
 // resolves to its active window/pane.
 //
@@ -254,7 +254,7 @@ class CliTmuxController implements TmuxController {
     } catch (err) {
       const detail = err instanceof Error ? err.message : String(err);
       throw new Error(
-        `Obiclaude: tmux command failed (${args.join(" ")}): ${detail}`,
+        `OBSIDIAX: tmux command failed (${args.join(" ")}): ${detail}`,
       );
     }
   }
@@ -283,6 +283,6 @@ export function createTmuxController(options?: {
   return new CliTmuxController(
     options?.tmuxBin ?? resolveBin("tmux"),
     options?.configPath ?? null,
-    options?.socket ?? "obiclaude",
+    options?.socket ?? "obsidiax",
   );
 }
