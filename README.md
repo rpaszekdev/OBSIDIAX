@@ -2,7 +2,7 @@
 
 tmux inside Obsidian, plus a history rail that resumes your past Claude Code sessions.
 
-![OBSIDIAX — split tmux coding sessions with a session history rail inside Obsidian](hero.png)
+![OBSIDIAX — a tmux coding session running inside Obsidian](hero.png)
 
 ![OBSIDIAX — terminal split alongside a note: TMUX + OBSIDIAN = OBSIDIAX](hero2.png)
 
