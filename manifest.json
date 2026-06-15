@@ -1,0 +1,9 @@
+{
+  "id": "obiclaude",
+  "name": "OBSIDIAX",
+  "version": "0.1.0",
+  "minAppVersion": "1.5.0",
+  "description": "tmux inside Obsidian: split coding sessions and a history rail that resumes past Claude Code sessions.",
+  "author": "Robert Paszek",
+  "isDesktopOnly": true
+}
