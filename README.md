@@ -2,6 +2,8 @@
 
 tmux inside Obsidian, plus a history rail that resumes your past Claude Code sessions.
 
+![OBSIDIAX — split tmux coding sessions with a session history rail inside Obsidian](hero.png)
+
 - **Coding session leaf** — an `xterm.js` terminal that launches `tmux`, so you get real tmux splits (`Cmd+Enter` / `Cmd+D` via your `.tmux.conf`), fullscreen, and persistence for free.
 - **History rail** — a left-sidebar "Recents" list of every Claude Code session read straight from `~/.claude/projects/**/*.jsonl`. Filter by recent or by folder, search by title.
 - **Resume** — click any row → tmux opens a new pane, `cd`s into that session's folder, and runs `claude --resume <id>`.
